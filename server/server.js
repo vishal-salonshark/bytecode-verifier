@@ -13,6 +13,7 @@ app.put('/verify', async (req, res) => {
   const file_name = req.body.file_name
   const contract_address = req.body.contract_address
   const is_optimized = req.body.is_optimized
+  const solidity_code = req.body.solidity_code
 
   if (typeof chainChoice == 'undefined') {
     res.send({ message: 'Please specify a chain (e.g. mainnet)' })
@@ -43,6 +44,7 @@ app.put('/verify', async (req, res) => {
         file_name: file_name,
         contract_address: contract_address,
         is_optimized: is_optimized,
+        solidity_code : solidity_code,
         file_folder: process.cwd(),
       }
       // console.log(answers)

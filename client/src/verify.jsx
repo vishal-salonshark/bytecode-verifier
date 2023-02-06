@@ -11,10 +11,13 @@ import Button from 'react-bootstrap/Button'
 import InputGroup from 'react-bootstrap/InputGroup'
 import Form from 'react-bootstrap/Form'
 import Card from 'react-bootstrap/Card'
+import SolidityEditor from './SolidityEditor'
+
 
 const Verifier = () => {
   const [solcVersion, setSolcVersion] = useState('')
   const [fileName, setFileName] = useState('')
+  const [code, setCode] = useState('')
   const [contractAddress, setContractAddress] = useState('')
   const [isOptimized, setIsOptimized] = useState('')
   const [chainChoice, setChainChoice] = useState('')
@@ -136,6 +139,7 @@ const Verifier = () => {
           contract_address: contractAddress,
           is_optimized: isOptimized,
           chainChoice: chainChoice,
+          solidity_code: code,
         })
         .then((response) => {
           console.log(response.data)
@@ -149,6 +153,9 @@ const Verifier = () => {
     }
   }
 
+
+  
+ 
   return (
     <div className="container d-flex justify-content-center align-items-center flex-column">
       <Card
@@ -156,16 +163,6 @@ const Verifier = () => {
         style={{ width: '30rem', padding: '2rem' }}
       >
         <form onSubmit={handleSubmit}>
-          {/* <Form.Group controlId="solcSelect">
-        <Form.Label>Select a Solc Version</Form.Label>
-        <DropdownButton id="solcDropdown" title={solcVersion|| 'Select a Solc Version'}>
-          {Object.entries(menu.releases).map(key => (
-            <Dropdown.Item key={key} eventKey={key} onSelect={setSolcVersion(key[1])}>
-              {key[0]}
-            </Dropdown.Item>
-          ))}
-        </DropdownButton>
-      </Form.Group> */}
           <div>
             <InputGroup size="lg" className="mb-3">
               <InputGroup.Text id="inputGroup-sizing-lg">
@@ -249,12 +246,7 @@ const Verifier = () => {
           </Button>
         </form>
       </Card>
-      <div className='d-flex justify-content-center align-items-center m-5 border border-0 shadow-lg p-3 mb-5 bg-body rounded' style={{ width: '75rem' }}>
-      <InputGroup style={{ minHeight: '20rem', padding: '2rem'  }}>
-        <InputGroup.Text>With textarea</InputGroup.Text>
-        <Form.Control as="textarea" aria-label="With textarea" />
-      </InputGroup>
-      </div>
+          <SolidityEditor onChange={(e)=>{setCode(e)}} />
     </div>
   )
 }

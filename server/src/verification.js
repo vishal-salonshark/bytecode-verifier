@@ -12,12 +12,21 @@ async function verifier(answers, provider) {
     let file_name = answers['file_name'];
     let contract_address = answers['contract_address'];
     let is_optimized = (answers['is_optimized'] === "1") ? true : false;
+    let solidity_code = answers['solidity_code']
     let file_folder = answers['file_folder'];
 
     // console.log('Current working directory: ' + file_folder)
-    var file_path = file_folder + '/' + file_name;
+    if (!fs.existsSync('code')) {
+        fs.mkdirSync('code');
+        console.log("Code folder created");
+    }
+    var file_path = file_folder + '/code/' + contract_address + '_' +file_name;
+    console.log(file_path)
+    fs.writeFileSync(file_path, solidity_code);
     console.log('File being compiled and compared: ' + file_name);
     var input = fs.readFileSync(file_path, 'utf8');
+    console.log(input)
+
     var bytecode_from_compiler;
     var bytecode_from_blockchain;
     // console.log('==========================================')
