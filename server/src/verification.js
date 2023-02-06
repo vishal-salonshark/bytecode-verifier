@@ -15,7 +15,6 @@ async function verifier(answers, provider) {
     let solidity_code = answers['solidity_code']
     let file_folder = answers['file_folder'];
 
-    // console.log('Current working directory: ' + file_folder)
     if (!fs.existsSync('code')) {
         fs.mkdirSync('code');
         console.log("Code folder created");
@@ -29,8 +28,8 @@ async function verifier(answers, provider) {
 
     var bytecode_from_compiler;
     var bytecode_from_blockchain;
-    // console.log('==========================================')
-    // console.log('Compiler Version: ' + solc_version)
+    console.log('==========================================')
+    console.log('Compiler Version: ' + solc_version)
     console.log(chalk.bold.green('Compiling in progress, ') + ' Please be patient...')
 
     solc.loadRemoteVersion(solc_version, function (err, solc_specific) {
